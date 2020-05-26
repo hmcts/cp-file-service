@@ -8,14 +8,17 @@
         <version>7.0.5-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>uk.gov.justice</groupId>
-    <artifactId>file-service-alfresco</artifactId>
+
+    <artifactId>file-service</artifactId>
+    <groupId>uk.gov.justice.services</groupId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>alfresco-stub</module>
-        <module>file-api</module>
-        <module>file-alfresco</module>
+        <module>file-service-liquibase</module>
+        <module>file-service-persistence</module>
+        <module>file-service-api</module>
+        <module>file-service-it</module>
+        <module>file-service-test-utils</module>
     </modules>
 
 </project>
