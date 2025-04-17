@@ -26,15 +26,7 @@
     <properties>
         <cpp.repo.name>cp-file-service</cpp.repo.name>
         <maven-common-bom.version>17.102.0</maven-common-bom.version>
-        <cucumber.reporting.plugin.version>2.0.0</cucumber.reporting.plugin.version>
-        <framework-wiremock-service.version>17.0.1</framework-wiremock-service.version>
-
-        <!-- Fix me -->
-        <openejb.version>8.0.13</openejb.version>
-
-        <!-- Must be moved to parent-pom -->
-        <maven-plugin-annotations.version>3.7.1</maven-plugin-annotations.version>
-
+        <framework-libraries.version>17.102.1</framework-libraries.version>
     </properties>
 
     <dependencyManagement>
@@ -47,34 +39,19 @@
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>uk.gov.justice.framework-api</groupId>
-                <artifactId>framework-api-unifiedsearch</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uk.gov.justice.framework-api</groupId>
-                <artifactId>framework-api-domain</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>uk.gov.justice.utils</groupId>
                 <artifactId>utilities-core</artifactId>
-                <version>${project.version}</version>
+                <version>${framework-libraries.version}</version>
             </dependency>
             <dependency>
                 <groupId>uk.gov.justice.utils</groupId>
                 <artifactId>utilities-file</artifactId>
-                <version>${project.version}</version>
+                <version>${framework-libraries.version}</version>
             </dependency>
             <dependency>
                 <groupId>uk.gov.justice.utils</groupId>
                 <artifactId>test-utils-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uk.gov.justice.maven</groupId>
-                <artifactId>maven-test-utils</artifactId>
-                <version>${project.version}</version>
+                <version>${framework-libraries.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -117,33 +94,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <random.jms.port>${random-jms-port}</random.jms.port>
-                                <random.http.port>${random-http-port}</random.http.port>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>reserve-jms-port</id>
-                                <goals>
-                                    <goal>reserve-network-port</goal>
-                                </goals>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <portNames>
-                                        <portName>random-jms-port</portName>
-                                        <portName>random-http-port</portName>
-                                        <portName>random-management-port</portName>
-                                    </portNames>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
