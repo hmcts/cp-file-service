@@ -4,16 +4,15 @@ import static java.io.File.createTempFile;
 import static java.nio.file.Files.copy;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.UUID.randomUUID;
-import static javax.json.Json.createObjectBuilder;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.fail;
-import static uk.gov.justice.services.common.converter.ZonedDateTimes.fromSqlTimestamp;
+import static uk.gov.justice.fileservice.common.converter.FsZonedDateTimes.fromSqlTimestamp;
 
-import uk.gov.justice.services.common.util.UtcClock;
+import uk.gov.justice.fileservice.common.jdbc.FsLiquibaseDatabaseBootstrapper;
+import uk.gov.justice.fileservice.common.util.FsUtcClock;
 import uk.gov.justice.services.fileservice.utils.test.FileStoreTestDataSourceProvider;
-import uk.gov.justice.services.test.utils.core.jdbc.LiquibaseDatabaseBootstrapper;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -29,8 +28,6 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.json.JsonObject;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,12 +42,12 @@ public class ContentJdbcRepositoryIT {
     private static final String LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML = "liquibase/file-service-liquibase-db-changelog.xml";
 
     @Mock
-    private UtcClock clock;
+    private FsUtcClock clock;
 
     @InjectMocks
     private ContentJdbcRepository contentJdbcRepository;
 
-    private final LiquibaseDatabaseBootstrapper liquibaseDatabaseBootstrapper = new LiquibaseDatabaseBootstrapper();
+    private final FsLiquibaseDatabaseBootstrapper fsLiquibaseDatabaseBootstrapper = new FsLiquibaseDatabaseBootstrapper();
 
     private Connection connection;
 
@@ -59,7 +56,7 @@ public class ContentJdbcRepositoryIT {
 
         connection = new FileStoreTestDataSourceProvider().getDatasource().getConnection();
 
-        liquibaseDatabaseBootstrapper.bootstrap(
+        fsLiquibaseDatabaseBootstrapper.bootstrap(
                 LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML,
                 connection);
     }
@@ -104,7 +101,7 @@ public class ContentJdbcRepositoryIT {
 
         final UUID fileId = randomUUID();
         final File inputFile = getFile("/for-testing-file-store.jpg");
-        final ZonedDateTime deletedAt = new UtcClock().now();
+        final ZonedDateTime deletedAt = new FsUtcClock().now();
 
         final InputStream content = new FileInputStream(inputFile);
         contentJdbcRepository.insert(fileId, content, connection);
@@ -144,7 +141,7 @@ public class ContentJdbcRepositoryIT {
 
         final UUID fileId = randomUUID();
         final InputStream contentInputStream = new ByteArrayInputStream("some file content bytes".getBytes());
-        final ZonedDateTime deletedAt = new UtcClock().now();
+        final ZonedDateTime deletedAt = new FsUtcClock().now();
 
         contentJdbcRepository.insert(fileId, contentInputStream, connection);
 

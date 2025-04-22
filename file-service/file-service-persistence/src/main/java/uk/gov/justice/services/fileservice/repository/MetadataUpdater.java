@@ -1,11 +1,11 @@
 package uk.gov.justice.services.fileservice.repository;
 
-import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
+import static uk.gov.justice.fileservice.common.messaging.FsJsonObjects.createObjectBuilder;
 
-import uk.gov.justice.services.common.converter.ZonedDateTimes;
-import uk.gov.justice.services.common.util.UtcClock;
+import uk.gov.justice.fileservice.common.converter.FsZonedDateTimes;
+import uk.gov.justice.fileservice.common.file.ContentTypeDetector;
+import uk.gov.justice.fileservice.common.util.FsUtcClock;
 import uk.gov.justice.services.fileservice.api.StorageException;
-import uk.gov.justice.services.utilities.file.ContentTypeDetector;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class MetadataUpdater {
     ContentTypeDetector contentTypeDetector;
 
     @Inject
-    UtcClock utcClock;
+    FsUtcClock fsUtcClock;
 
     /**
      * Adds mediaType and currentTime to the metadata json.
@@ -46,7 +46,7 @@ public class MetadataUpdater {
     public JsonObject addMediaTypeAndCreatedTime(final JsonObject metadata, final BufferedInputStream contentStream) throws StorageException {
 
         final JsonObjectBuilder objectBuilder = createObjectBuilder(metadata)
-                .add("createdAt", ZonedDateTimes.toString(utcClock.now()));
+                .add("createdAt", FsZonedDateTimes.toString(fsUtcClock.now()));
 
         if (! metadata.containsKey("mediaType")) {
             objectBuilder.add("mediaType", getMediaTypeFrom(contentStream));

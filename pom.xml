@@ -12,7 +12,7 @@
 
     <groupId>uk.gov.justice.framework</groupId>
     <artifactId>cp-file-service</artifactId>
-    <version>17.102.2-SNAPSHOT</version>
+    <version>17.102.3-EXTRACT-M1</version>
     <packaging>pom</packaging>
 
     <name>Framework File service</name>
@@ -21,13 +21,35 @@
     <modules>
         <module>file-service</module>
         <module>file-service-alfresco</module>
+        <module>file-service-utils</module>
+        <module>file-service-bom</module>
+        <module>test-utils</module>
     </modules>
 
     <properties>
         <cpp.repo.name>cp-file-service</cpp.repo.name>
         <maven-common-bom.version>17.102.0</maven-common-bom.version>
-        <framework-libraries.version>17.102.1</framework-libraries.version>
+
+        <!-- plugin related -->
+        <plugins.maven.compiler.version>3.10.1</plugins.maven.compiler.version>
+        <java.major.version>17</java.major.version>
+        <compiler.debug>true</compiler.debug>
+        <compiler.debuglevel>lines,vars,source</compiler.debuglevel>
+        <compiler.showdeprecation>true</compiler.showdeprecation>
+        <compiler.showwarnings>true</compiler.showwarnings>
+        <compiler.optimise>true</compiler.optimise>
+        <compiler.max.errors>100</compiler.max.errors>
+        <compiler.max.warnings>100</compiler.max.warnings>
+        <jaxb.version>2.3.1</jaxb.version>
+        <plugins.coveralls.version>4.3.0</plugins.coveralls.version>
+        <plugins.maven.failsafe.version>3.1.2</plugins.maven.failsafe.version>
     </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:hmcts/cp-file-service.git</connection>
+        <developerConnection>scm:git:git@github.com:hmcts/cp-file-service.git</developerConnection>
+        <url>https://github.com/hmcts/cp-file-service</url>
+    </scm>
 
     <dependencyManagement>
         <dependencies>
@@ -39,46 +61,17 @@
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>uk.gov.justice.utils</groupId>
-                <artifactId>utilities-core</artifactId>
-                <version>${framework-libraries.version}</version>
+                <groupId>uk.gov.justice.file.service</groupId>
+                <artifactId>file-service-utils</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>uk.gov.justice.utils</groupId>
-                <artifactId>utilities-file</artifactId>
-                <version>${framework-libraries.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uk.gov.justice.utils</groupId>
-                <artifactId>test-utils-core</artifactId>
-                <version>${framework-libraries.version}</version>
+                <groupId>uk.gov.justice.file.service</groupId>
+                <artifactId>test-utils</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <scm>
-        <connection>${cpp.scm.connection}</connection>
-        <developerConnection>${cpp.scm.developerConnection}</developerConnection>
-        <url>${cpp.scm.url}</url>
-    </scm>
-
-    <build>
-
-        <plugins>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>javax.xml.bind</groupId>
-                        <artifactId>jaxb-api</artifactId>
-                        <version>${jaxb.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-
-    </build>
 
     <profiles>
         <profile>
@@ -94,6 +87,21 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${plugins.maven.failsafe.version}</version>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>verify</id>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

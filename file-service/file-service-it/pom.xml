@@ -5,7 +5,7 @@
     <parent>
         <artifactId>file-service</artifactId>
         <groupId>uk.gov.justice.services</groupId>
-        <version>17.102.2-SNAPSHOT</version>
+        <version>17.102.3-EXTRACT-M1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -37,18 +37,13 @@
         </dependency>
 
         <dependency>
-            <groupId>uk.gov.justice.utils</groupId>
-            <artifactId>utilities-core</artifactId>
+            <groupId>uk.gov.justice.file.service</groupId>
+            <artifactId>file-service-utils</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>uk.gov.justice.utils</groupId>
-            <artifactId>utilities-file</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>uk.gov.justice.utils</groupId>
-            <artifactId>test-utils-core</artifactId>
+            <groupId>uk.gov.justice.file.service</groupId>
+            <artifactId>test-utils</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -79,6 +74,16 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

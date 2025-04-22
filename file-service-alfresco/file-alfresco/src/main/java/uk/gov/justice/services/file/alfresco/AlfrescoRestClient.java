@@ -3,7 +3,7 @@ package uk.gov.justice.services.file.alfresco;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
-import uk.gov.justice.services.common.configuration.GlobalValue;
+import uk.gov.justice.fileservice.common.configuration.FsGlobalValue;
 
 import java.io.InputStream;
 
@@ -25,19 +25,19 @@ public class AlfrescoRestClient {
     private static final String NO_PROXY = "none";
 
     @Inject
-    @GlobalValue(key = "alfrescoBaseUri")
+    @FsGlobalValue(key = "alfrescoBaseUri")
     String alfrescoBaseUri;
 
     @Inject
-    @GlobalValue(key = "alfresco.proxy.type", defaultValue = NO_PROXY)
+    @FsGlobalValue(key = "alfresco.proxy.type", defaultValue = NO_PROXY)
     String proxyType;
 
     @Inject
-    @GlobalValue(key = "alfresco.proxy.hostname", defaultValue = "none")
+    @FsGlobalValue(key = "alfresco.proxy.hostname", defaultValue = "none")
     String proxyHostname;
 
     @Inject
-    @GlobalValue(key = "alfresco.proxy.port", defaultValue = "0")
+    @FsGlobalValue(key = "alfresco.proxy.port", defaultValue = "0")
     String proxyPort;
 
     /**

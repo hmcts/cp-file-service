@@ -11,9 +11,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-import uk.gov.justice.services.common.util.UtcClock;
+import uk.gov.justice.fileservice.common.util.FsUtcClock;
 import uk.gov.justice.services.fileservice.api.StorageException;
-import uk.gov.justice.services.utilities.file.ContentTypeDetector;
+import uk.gov.justice.fileservice.common.file.ContentTypeDetector;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class MetadataUpdaterTest {
     private ContentTypeDetector contentTypeDetector;
 
     @Mock
-    private UtcClock utcClock;
+    private FsUtcClock fsUtcClock;
 
     @InjectMocks
     private MetadataUpdater metadataUpdater;
@@ -53,7 +53,7 @@ public class MetadataUpdaterTest {
                 .add("someField", existingValue)
                 .build();
 
-        when(utcClock.now()).thenReturn(dateTime);
+        when(fsUtcClock.now()).thenReturn(dateTime);
         when(contentTypeDetector.detectContentTypeOf(contentStream)).thenReturn(mediaType);
 
         final JsonObject updatedMetadata = metadataUpdater.addMediaTypeAndCreatedTime(metadata, contentStream);
@@ -78,7 +78,7 @@ public class MetadataUpdaterTest {
                 .add("mediaType", "image/jpeg")
                 .build();
 
-        when(utcClock.now()).thenReturn(dateTime);
+        when(fsUtcClock.now()).thenReturn(dateTime);
 
         final JsonObject updatedMetadata = metadataUpdater.addMediaTypeAndCreatedTime(metadata, contentStream);
         final String json = updatedMetadata.toString();
@@ -105,7 +105,7 @@ public class MetadataUpdaterTest {
                 .add("someField", existingValue)
                 .build();
 
-        when(utcClock.now()).thenReturn(dateTime);
+        when(fsUtcClock.now()).thenReturn(dateTime);
         when(contentTypeDetector.detectContentTypeOf(contentStream)).thenThrow(ioException);
 
         final StorageException expected = assertThrows(StorageException.class, () -> metadataUpdater.addMediaTypeAndCreatedTime(metadata, contentStream));

@@ -9,9 +9,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
+import uk.gov.justice.fileservice.common.file.FileServiceClasspathFileResource;
+import uk.gov.justice.fileservice.common.jdbc.FsLiquibaseDatabaseBootstrapper;
 import uk.gov.justice.services.fileservice.domain.FileReference;
-import uk.gov.justice.services.test.utils.core.files.ClasspathFileResource;
-import uk.gov.justice.services.test.utils.core.jdbc.LiquibaseDatabaseBootstrapper;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,14 +28,14 @@ public class FileServiceTestClientTest {
     private static final String LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML = "liquibase/file-service-liquibase-db-changelog.xml";
     private static FileStoreTestDataSourceProvider filestoreTestDataSourceProvider = new FileStoreTestDataSourceProvider();
 
-    private final ClasspathFileResource classpathFileResource = new ClasspathFileResource();
+    private final FileServiceClasspathFileResource fileServiceClasspathFileResource = new FileServiceClasspathFileResource();
     private final FileServiceTestClient fileServiceTestClient = new FileServiceTestClient();
 
     @BeforeAll
     public static void boostrapFileStoreDatabase() throws Exception {
 
         try(final Connection connection = filestoreTestDataSourceProvider.getDatasource().getConnection()) {
-            new LiquibaseDatabaseBootstrapper().bootstrap(
+            new FsLiquibaseDatabaseBootstrapper().bootstrap(
                     LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML,
                     connection);
         }
@@ -47,7 +47,7 @@ public class FileServiceTestClientTest {
 
         final String fileName = "some.jpg";
         final String mediaType = "image/jpeg";
-        final File inputFile = classpathFileResource.getFileFromClasspath("/for-testing.jpg");
+        final File inputFile = fileServiceClasspathFileResource.getFileFromClasspath("/for-testing.jpg");
 
         final InputStream contentStream = new FileInputStream(inputFile);
 
@@ -92,7 +92,7 @@ public class FileServiceTestClientTest {
 
         final String fileName = "some.jpg";
         final String mediaType = "image/jpeg";
-        final File inputFile = classpathFileResource.getFileFromClasspath("/for-testing.jpg");
+        final File inputFile = fileServiceClasspathFileResource.getFileFromClasspath("/for-testing.jpg");
 
         final InputStream contentStream = new FileInputStream(inputFile);
 

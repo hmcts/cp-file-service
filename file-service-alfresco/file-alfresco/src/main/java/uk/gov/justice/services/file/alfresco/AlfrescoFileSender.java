@@ -9,7 +9,7 @@ import static javax.ws.rs.core.Response.Status.OK;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static uk.gov.justice.services.file.alfresco.Headers.headersWithUserId;
 
-import uk.gov.justice.services.common.configuration.GlobalValue;
+import uk.gov.justice.fileservice.common.configuration.FsGlobalValue;
 import uk.gov.justice.services.file.api.FileOperationException;
 import uk.gov.justice.services.file.api.sender.FileData;
 import uk.gov.justice.services.file.api.sender.FileSender;
@@ -31,11 +31,11 @@ public class AlfrescoFileSender implements FileSender {
     private static final String FORM_FILED_FILEDATA = "filedata";
 
     @Inject
-    @GlobalValue(key = "alfrescoUploadPath", defaultValue = "/service/case/upload")
+    @FsGlobalValue(key = "alfrescoUploadPath", defaultValue = "/service/case/upload")
     String alfrescoUploadPath;
 
     @Inject
-    @GlobalValue(key = "alfrescoUploadUser")
+    @FsGlobalValue(key = "alfrescoUploadUser")
     String alfrescoUploadUser;
 
     @Inject

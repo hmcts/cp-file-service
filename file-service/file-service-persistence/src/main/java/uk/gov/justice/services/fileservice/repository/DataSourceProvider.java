@@ -2,9 +2,9 @@ package uk.gov.justice.services.fileservice.repository;
 
 import static java.lang.String.format;
 
+import uk.gov.justice.fileservice.common.jdbc.persistence.FsInitialContextFactory;
 import uk.gov.justice.services.fileservice.api.ConfigurationException;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
-import uk.gov.justice.services.jdbc.persistence.InitialContextFactory;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ public class DataSourceProvider {
     private static final String JNDI_DATASOURCE = "java:/DS.fileservice";
 
     @Inject
-    InitialContextFactory initialContextFactory;
+    FsInitialContextFactory fsInitialContextFactory;
 
     /**
      * Gets the container {@link DataSource} using JNDI
@@ -32,7 +32,7 @@ public class DataSourceProvider {
         final String jndiName = getJndiName();
 
         try {
-            return (DataSource) initialContextFactory.create().lookup(jndiName);
+            return (DataSource) fsInitialContextFactory.create().lookup(jndiName);
         } catch (final NamingException e) {
             throw new ConfigurationException(format("Failed to get Connection from container using JNDI name '%s'", jndiName), e);
         }

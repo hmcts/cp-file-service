@@ -9,10 +9,11 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
-import uk.gov.justice.services.cdi.LoggerProducer;
-import uk.gov.justice.services.common.configuration.JndiBasedServiceContextNameProvider;
-import uk.gov.justice.services.common.configuration.ValueProducer;
-import uk.gov.justice.services.common.util.UtcClock;
+import uk.gov.justice.fileservice.common.cdi.FsLoggerProducer;
+import uk.gov.justice.fileservice.common.file.FileServiceClasspathFileResource;
+import uk.gov.justice.fileservice.common.jdbc.FsLiquibaseDatabaseBootstrapper;
+import uk.gov.justice.fileservice.common.jdbc.persistence.FsInitialContextFactory;
+import uk.gov.justice.fileservice.common.util.FsUtcClock;
 import uk.gov.justice.services.fileservice.api.FileRetriever;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.FileStorer;
@@ -23,10 +24,7 @@ import uk.gov.justice.services.fileservice.repository.FileStore;
 import uk.gov.justice.services.fileservice.repository.MetadataJdbcRepository;
 import uk.gov.justice.services.fileservice.repository.MetadataUpdater;
 import uk.gov.justice.services.fileservice.utils.test.FileStoreTestDataSourceProvider;
-import uk.gov.justice.services.jdbc.persistence.InitialContextFactory;
-import uk.gov.justice.services.test.utils.core.files.ClasspathFileResource;
-import uk.gov.justice.services.test.utils.core.jdbc.LiquibaseDatabaseBootstrapper;
-import uk.gov.justice.services.utilities.file.ContentTypeDetector;
+import uk.gov.justice.fileservice.common.file.ContentTypeDetector;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,8 +50,8 @@ public class FileServiceIT {
 
     private static final String LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML = "liquibase/file-service-liquibase-db-changelog.xml";
 
-    private final LiquibaseDatabaseBootstrapper liquibaseDatabaseBootstrapper = new LiquibaseDatabaseBootstrapper();
-    private final ClasspathFileResource classpathFileResource = new ClasspathFileResource();
+    private final FsLiquibaseDatabaseBootstrapper fsLiquibaseDatabaseBootstrapper = new FsLiquibaseDatabaseBootstrapper();
+    private final FileServiceClasspathFileResource fileServiceClasspathFileResource = new FileServiceClasspathFileResource();
 
     private DataSource dataSource = new FileStoreTestDataSourceProvider().getDatasource();
 
@@ -68,7 +66,7 @@ public class FileServiceIT {
             FileStorer.class,
             FileReference.class,
 
-            InitialContextFactory.class,
+            FsInitialContextFactory.class,
 
             FileService.class,
 
@@ -78,16 +76,14 @@ public class FileServiceIT {
             MetadataJdbcRepository.class,
             FileStore.class,
             MetadataUpdater.class,
-            UtcClock.class,
+            FsUtcClock.class,
             LogFactory.class,
 
             MetadataUpdater.class,
             ContentTypeDetector.class,
-            LoggerProducer.class,
+            FsLoggerProducer.class,
             Logger.class,
-            UtcClock.class,
-            ValueProducer.class,
-            JndiBasedServiceContextNameProvider.class
+            FsUtcClock.class
     })
     public WebApp war() {
         return new WebApp()
@@ -97,7 +93,7 @@ public class FileServiceIT {
 
     @BeforeEach
     public void initDatabase() throws Exception {
-        liquibaseDatabaseBootstrapper.bootstrap(
+        fsLiquibaseDatabaseBootstrapper.bootstrap(
                 LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML,
                 dataSource.getConnection());
     }
@@ -111,7 +107,7 @@ public class FileServiceIT {
                 .add("metadataField", "metadataValue")
                 .build();
 
-        final File inputFile = classpathFileResource.getFileFromClasspath("/for-testing-file-store.jpg");
+        final File inputFile = fileServiceClasspathFileResource.getFileFromClasspath("/for-testing-file-store.jpg");
         final FileInputStream inputStream = new FileInputStream(inputFile);
 
         final UUID fileId = fileService.store(metadata, inputStream);

@@ -1,7 +1,7 @@
 package uk.gov.justice.services.fileservice.utils.test;
 
 
-import static uk.gov.justice.services.test.utils.common.host.TestHostProvider.getHost;
+import static uk.gov.justice.fileservice.common.host.FsTestHostProvider.getHost;
 
 import uk.gov.justice.services.fileservice.repository.DataSourceProvider;
 
