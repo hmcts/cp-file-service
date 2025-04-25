@@ -8,10 +8,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.fail;
-import static uk.gov.justice.fileservice.common.converter.FsZonedDateTimes.fromSqlTimestamp;
+import static uk.gov.justice.fileservice.common.converter.ZonedDateTimes.fromSqlTimestamp;
 
-import uk.gov.justice.fileservice.common.jdbc.FsLiquibaseDatabaseBootstrapper;
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.jdbc.LiquibaseDatabaseBootstrapper;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.utils.test.FileStoreTestDataSourceProvider;
 
 import java.io.ByteArrayInputStream;
@@ -42,12 +42,12 @@ public class ContentJdbcRepositoryIT {
     private static final String LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML = "liquibase/file-service-liquibase-db-changelog.xml";
 
     @Mock
-    private FsUtcClock clock;
+    private UtcClock clock;
 
     @InjectMocks
     private ContentJdbcRepository contentJdbcRepository;
 
-    private final FsLiquibaseDatabaseBootstrapper fsLiquibaseDatabaseBootstrapper = new FsLiquibaseDatabaseBootstrapper();
+    private final LiquibaseDatabaseBootstrapper liquibaseDatabaseBootstrapper = new LiquibaseDatabaseBootstrapper();
 
     private Connection connection;
 
@@ -56,7 +56,7 @@ public class ContentJdbcRepositoryIT {
 
         connection = new FileStoreTestDataSourceProvider().getDatasource().getConnection();
 
-        fsLiquibaseDatabaseBootstrapper.bootstrap(
+        liquibaseDatabaseBootstrapper.bootstrap(
                 LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML,
                 connection);
     }
@@ -101,7 +101,7 @@ public class ContentJdbcRepositoryIT {
 
         final UUID fileId = randomUUID();
         final File inputFile = getFile("/for-testing-file-store.jpg");
-        final ZonedDateTime deletedAt = new FsUtcClock().now();
+        final ZonedDateTime deletedAt = new UtcClock().now();
 
         final InputStream content = new FileInputStream(inputFile);
         contentJdbcRepository.insert(fileId, content, connection);
@@ -141,7 +141,7 @@ public class ContentJdbcRepositoryIT {
 
         final UUID fileId = randomUUID();
         final InputStream contentInputStream = new ByteArrayInputStream("some file content bytes".getBytes());
-        final ZonedDateTime deletedAt = new FsUtcClock().now();
+        final ZonedDateTime deletedAt = new UtcClock().now();
 
         contentJdbcRepository.insert(fileId, contentInputStream, connection);
 

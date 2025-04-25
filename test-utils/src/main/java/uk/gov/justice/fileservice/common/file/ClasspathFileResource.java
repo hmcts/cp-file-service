@@ -9,7 +9,7 @@ import java.net.URL;
 /**
  * Utility class for loading a classpath resource as a {@link File}
  */
-public class FileServiceClasspathFileResource {
+public class ClasspathFileResource {
 
     /**
      * Loads a resource specified by the supplied path from the classpath.

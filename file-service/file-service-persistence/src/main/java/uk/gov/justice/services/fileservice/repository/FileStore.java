@@ -5,7 +5,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.UUID.randomUUID;
 
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.DataIntegrityException;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.StorageException;
@@ -44,7 +44,7 @@ public class FileStore {
     private MetadataUpdater metadataUpdater;
 
     @Inject
-    private FsUtcClock clock;
+    private UtcClock clock;
 
     /**
      * Stores file content and metadata in the database.

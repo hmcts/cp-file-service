@@ -5,7 +5,7 @@ import java.time.ZonedDateTime;
 /**
  * Interface for clock providers.
  */
-public interface FsClock {
+public interface Clock {
 
     ZonedDateTime now();
 }

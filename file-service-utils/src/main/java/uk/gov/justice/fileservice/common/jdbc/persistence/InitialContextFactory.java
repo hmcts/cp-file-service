@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 /**
  * Simple wrapper class for getting an {@link InitialContext} to allow for mocking in tests
  */
-public class FsInitialContextFactory {
+public class InitialContextFactory {
 
     /**
      * Instantiates a new {@link InitialContext}

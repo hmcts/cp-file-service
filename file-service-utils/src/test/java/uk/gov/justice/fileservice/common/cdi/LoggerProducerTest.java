@@ -6,7 +6,7 @@ import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import uk.gov.justice.fileservice.common.util.FsClock;
+import uk.gov.justice.fileservice.common.util.Clock;
 
 import javax.enterprise.inject.spi.InjectionPoint;
 
@@ -19,20 +19,20 @@ import org.slf4j.LoggerFactory;
 
 
 @ExtendWith(MockitoExtension.class)
-public class FsLoggerProducerTest {
+public class LoggerProducerTest {
 
     @InjectMocks
-    private FsLoggerProducer fsLoggerProducer;
+    private LoggerProducer loggerProducer;
 
     @Test @SuppressWarnings("unchecked")
     public void shouldCreateALoggerWithTheCorrectCallingClass() throws Exception {
 
-        final Class callingClass = FsClock.class;
+        final Class callingClass = Clock.class;
         final InjectionPoint injectionPoint = mock(InjectionPoint.class, RETURNS_DEEP_STUBS);
 
         when(injectionPoint.getMember().getDeclaringClass()).thenReturn(callingClass);
 
-        final Logger logger = fsLoggerProducer.loggerProducer(injectionPoint);
+        final Logger logger = loggerProducer.loggerProducer(injectionPoint);
 
         assertThat(logger.getName(), is(LoggerFactory.getLogger(callingClass).getName()));
     }

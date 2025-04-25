@@ -1,7 +1,7 @@
 package uk.gov.justice.fileservice.common.configuration;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static uk.gov.justice.fileservice.common.configuration.FsCommonValueAnnotationDef.NULL_DEFAULT;
+import static uk.gov.justice.fileservice.common.configuration.CommonValueAnnotationDef.NULL_DEFAULT;
 
 import java.lang.annotation.Retention;
 
@@ -10,7 +10,7 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RUNTIME)
-public @interface FsGlobalValue {
+public @interface GlobalValue {
 
     /**
      * Bundle key

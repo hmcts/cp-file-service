@@ -9,14 +9,14 @@ import javax.json.JsonObjectBuilder;
 /**
  * Collection of static utility methods for getting deep values from a {@link JsonObject}.
  */
-public final class FsJsonObjects {
+public final class JsonObjects {
 
     private static final String FIELD_IS_NOT_A_TYPE = "Field %s is not a %s";
 
     /**
      * Private constructor to prevent misuse of utility class.
      */
-    private FsJsonObjects() {
+    private JsonObjects() {
     }
 
     /**

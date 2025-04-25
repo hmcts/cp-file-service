@@ -19,10 +19,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FsGlobalValueProducerTest {
+public class GlobalValueProducerTest {
 
     @InjectMocks
-    private FsGlobalValueProducer valueProducer;
+    private GlobalValueProducer valueProducer;
 
     @Mock
     private InjectionPoint propertyInjectionPoint;
@@ -31,7 +31,7 @@ public class FsGlobalValueProducerTest {
     private Annotated annotated;
 
     @Mock
-    private FsGlobalValue annotation;
+    private GlobalValue annotation;
 
     @Mock
     private InitialContext initialContext;
@@ -39,7 +39,7 @@ public class FsGlobalValueProducerTest {
     @BeforeEach
     public void setup() throws NamingException {
         when(propertyInjectionPoint.getAnnotated()).thenReturn(annotated);
-        when(annotated.getAnnotation(FsGlobalValue.class)).thenReturn(annotation);
+        when(annotated.getAnnotation(GlobalValue.class)).thenReturn(annotation);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class FsGlobalValueProducerTest {
         when(initialContext.lookup("java:global/unknownProperty")).thenThrow(NameNotFoundException.class);
         when(annotation.key()).thenReturn("unknownProperty");
 
-        when(annotation.defaultValue()).thenReturn(FsCommonValueAnnotationDef.NULL_DEFAULT);
+        when(annotation.defaultValue()).thenReturn(CommonValueAnnotationDef.NULL_DEFAULT);
 
         assertThrows(FsMissingPropertyException.class, () ->valueProducer.stringValueOf(propertyInjectionPoint));
     }

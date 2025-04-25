@@ -1,6 +1,6 @@
 package uk.gov.justice.fileservice.common.configuration;
 
-import static uk.gov.justice.fileservice.common.configuration.FsCommonValueAnnotationDef.globalValueAnnotationOf;
+import static uk.gov.justice.fileservice.common.configuration.CommonValueAnnotationDef.globalValueAnnotationOf;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -8,30 +8,30 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.naming.NamingException;
 
 /**
- * Looks up global jndi names in order to inject their values into @FsGlobalValue annotated
+ * Looks up global jndi names in order to inject their values into @GlobalValue annotated
  * properties.
  */
 @ApplicationScoped
-public class FsGlobalValueProducer extends FsAbstractValueProducer {
+public class GlobalValueProducer extends AbstractValueProducer {
 
-    public FsGlobalValueProducer() throws NamingException {
+    public GlobalValueProducer() throws NamingException {
         super();
     }
 
-    @FsGlobalValue
+    @GlobalValue
     @Produces
     public String stringValueOf(final InjectionPoint ip) throws NamingException {
         return jndiValueFor(globalValueAnnotationOf(ip));
     }
 
-    @FsGlobalValue
+    @GlobalValue
     @Produces
     public long longValueOf(final InjectionPoint ip) throws NamingException {
         return Long.valueOf(stringValueOf(ip));
     }
 
     @Override
-    protected String[] jndiNamesFrom(final FsCommonValueAnnotationDef annotation) {
+    protected String[] jndiNamesFrom(final CommonValueAnnotationDef annotation) {
         return new String[]{globalJNDINameFrom(annotation)};
     }
 }

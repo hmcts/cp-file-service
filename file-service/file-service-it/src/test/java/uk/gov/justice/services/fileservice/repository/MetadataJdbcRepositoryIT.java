@@ -5,7 +5,7 @@ import static javax.json.Json.createReader;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import uk.gov.justice.fileservice.common.jdbc.FsLiquibaseDatabaseBootstrapper;
+import uk.gov.justice.fileservice.common.jdbc.LiquibaseDatabaseBootstrapper;
 import uk.gov.justice.services.fileservice.utils.test.FileStoreTestDataSourceProvider;
 
 import java.io.ByteArrayInputStream;
@@ -27,7 +27,7 @@ public class MetadataJdbcRepositoryIT {
 
     private final MetadataJdbcRepository metadataJdbcRepository = new MetadataJdbcRepository();
     private final ContentJdbcRepository contentJdbcRepository = new ContentJdbcRepository();
-    private final FsLiquibaseDatabaseBootstrapper fsLiquibaseDatabaseBootstrapper = new FsLiquibaseDatabaseBootstrapper();
+    private final LiquibaseDatabaseBootstrapper liquibaseDatabaseBootstrapper = new LiquibaseDatabaseBootstrapper();
 
     private Connection connection;
 
@@ -35,7 +35,7 @@ public class MetadataJdbcRepositoryIT {
     public void setupDatabase() throws Exception {
 
         connection = new FileStoreTestDataSourceProvider().getDatasource().getConnection();
-        fsLiquibaseDatabaseBootstrapper.bootstrap(LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML, connection);
+        liquibaseDatabaseBootstrapper.bootstrap(LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML, connection);
     }
 
     @AfterEach

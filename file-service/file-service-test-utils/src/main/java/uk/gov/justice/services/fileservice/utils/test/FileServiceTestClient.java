@@ -5,8 +5,8 @@ import static java.util.Optional.of;
 import static java.util.UUID.randomUUID;
 import static javax.json.Json.createObjectBuilder;
 
-import uk.gov.justice.fileservice.common.converter.FsZonedDateTimes;
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.converter.ZonedDateTimes;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.domain.FileReference;
 import uk.gov.justice.services.fileservice.repository.ContentJdbcRepository;
@@ -46,7 +46,7 @@ public class FileServiceTestClient {
 
     private final MetadataJdbcRepository metadataJdbcRepository;
     private final ContentJdbcRepository contentJdbcRepository;
-    private final FsUtcClock fsUtcClock;
+    private final UtcClock fsUtcClock;
 
     /**
      * Creates a test file service client
@@ -54,7 +54,7 @@ public class FileServiceTestClient {
     public FileServiceTestClient() {
         metadataJdbcRepository = new MetadataJdbcRepository();
         contentJdbcRepository = new ContentJdbcRepository();
-        fsUtcClock = new FsUtcClock();
+        fsUtcClock = new UtcClock();
     }
 
     /**
@@ -101,7 +101,7 @@ public class FileServiceTestClient {
         final JsonObject metadata = createObjectBuilder()
                 .add("fileName", fileName)
                 .add("mediaType", mediaType)
-                .add("createdAt", FsZonedDateTimes.toString(fsUtcClock.now()))
+                .add("createdAt", ZonedDateTimes.toString(fsUtcClock.now()))
                 .build();
 
         contentJdbcRepository.insert(fileId, contentStream, connection);

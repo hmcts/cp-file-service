@@ -1,23 +1,23 @@
 package uk.gov.justice.fileservice.common.configuration;
 
 import static java.lang.String.format;
-import static uk.gov.justice.fileservice.common.configuration.FsCommonValueAnnotationDef.NULL_DEFAULT;
+import static uk.gov.justice.fileservice.common.configuration.CommonValueAnnotationDef.NULL_DEFAULT;
 
 import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
-abstract class FsAbstractValueProducer {
+abstract class AbstractValueProducer {
 
     private static final String GLOBAL_JNDI_NAME_PATTERN = "java:global/%s";
 
     InitialContext initialContext;
 
-    protected FsAbstractValueProducer() throws NamingException {
+    protected AbstractValueProducer() throws NamingException {
         initialContext = new InitialContext();
     }
 
-    protected String jndiValueFor(final FsCommonValueAnnotationDef annotation) throws NamingException {
+    protected String jndiValueFor(final CommonValueAnnotationDef annotation) throws NamingException {
         for (String jndiName : jndiNamesFrom(annotation)) {
             try {
                 return (String) initialContext.lookup(jndiName);
@@ -32,7 +32,7 @@ abstract class FsAbstractValueProducer {
 
     }
 
-    protected String globalJNDINameFrom(final FsCommonValueAnnotationDef annotation) {
+    protected String globalJNDINameFrom(final CommonValueAnnotationDef annotation) {
         return format(GLOBAL_JNDI_NAME_PATTERN, annotation.key());
     }
 
@@ -42,5 +42,5 @@ abstract class FsAbstractValueProducer {
      *
      * @return jndi name(s) to resolve (in order of priority).
      */
-    protected abstract String[] jndiNamesFrom(FsCommonValueAnnotationDef annotation);
+    protected abstract String[] jndiNamesFrom(CommonValueAnnotationDef annotation);
 }

@@ -9,14 +9,14 @@ import java.time.ZonedDateTime;
 /**
  * Utility functions for converting to and from date time objects.
  */
-public final class FsZonedDateTimes {
+public final class ZonedDateTimes {
 
     public static final String ISO_8601 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     /**
      * Private constructor to avoid misuse of utility class.
      */
-    private FsZonedDateTimes() {
+    private ZonedDateTimes() {
     }
 
     /**
