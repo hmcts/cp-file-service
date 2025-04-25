@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [17.102.3-M1] - 2025-04-25
+## [17.103.0-M1] - 2025-04-25
 ### Changed
 - Extract file service modules from cp-framework-libraries repo
 
