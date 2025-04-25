@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file, which loose
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [17.102.3-M1] - 2025-04-25
 ### Changed
-- Extract file service modules from cp-framework-libraries project
+- Extract file service modules from cp-framework-libraries repo
 
 ## [11.0.0] - 2023-01-26
 ### Changed
