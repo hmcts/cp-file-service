@@ -11,13 +11,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FsInitialContextFactoryTest {
+public class InitialContextFactoryTest {
 
-    private FsInitialContextFactory fsInitialContextFactory = new FsInitialContextFactory();
+    private InitialContextFactory initialContextFactory = new InitialContextFactory();
 
     @Test
     public void shouldCreateANewInitialContext() throws Exception {
 
-        assertThat(fsInitialContextFactory.create(), is(instanceOf(InitialContext.class)));
+        assertThat(initialContextFactory.create(), is(instanceOf(InitialContext.class)));
     }
 }

@@ -13,9 +13,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static uk.gov.justice.fileservice.common.reflection.FsReflectionUtil.getValueOfField;
+import static uk.gov.justice.fileservice.common.reflection.ReflectionUtil.getValueOfField;
 
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.DataIntegrityException;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.StorageException;
@@ -56,7 +56,7 @@ public class FileStoreTest {
     private MetadataUpdater metadataUpdater;
 
     @Mock
-    private FsUtcClock clock;
+    private UtcClock clock;
 
     @InjectMocks
     private FileStore fileStore;
@@ -239,7 +239,7 @@ public class FileStoreTest {
     public void shouldMarkFileAsDeleted() throws Exception {
 
         final UUID fileId = randomUUID();
-        final ZonedDateTime deletedAt = new FsUtcClock().now();
+        final ZonedDateTime deletedAt = new UtcClock().now();
 
         final DataSource dataSource = mock(DataSource.class);
         final Connection connection = mock(Connection.class);

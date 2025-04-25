@@ -3,9 +3,9 @@ package uk.gov.justice.services.fileservice.repository;
 import static java.lang.String.format;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
-import static uk.gov.justice.fileservice.common.converter.FsZonedDateTimes.toSqlTimestamp;
+import static uk.gov.justice.fileservice.common.converter.ZonedDateTimes.toSqlTimestamp;
 
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.DataIntegrityException;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.StorageException;
@@ -39,7 +39,7 @@ public class ContentJdbcRepository {
     public static final String MARK_AS_DELETED_SQL = "UPDATE content SET deleted = TRUE, deleted_at = ? WHERE file_id = ?";
 
     @Inject
-    private FsUtcClock clock;
+    private UtcClock clock;
 
     /**
      * Inserts the content into the content table as an array of bytes[]

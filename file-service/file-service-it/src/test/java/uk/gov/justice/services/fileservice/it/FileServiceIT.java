@@ -9,11 +9,11 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
-import uk.gov.justice.fileservice.common.cdi.FsLoggerProducer;
-import uk.gov.justice.fileservice.common.file.FileServiceClasspathFileResource;
-import uk.gov.justice.fileservice.common.jdbc.FsLiquibaseDatabaseBootstrapper;
-import uk.gov.justice.fileservice.common.jdbc.persistence.FsInitialContextFactory;
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.cdi.LoggerProducer;
+import uk.gov.justice.fileservice.common.file.ClasspathFileResource;
+import uk.gov.justice.fileservice.common.jdbc.LiquibaseDatabaseBootstrapper;
+import uk.gov.justice.fileservice.common.jdbc.persistence.InitialContextFactory;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.FileRetriever;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.FileStorer;
@@ -50,8 +50,8 @@ public class FileServiceIT {
 
     private static final String LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML = "liquibase/file-service-liquibase-db-changelog.xml";
 
-    private final FsLiquibaseDatabaseBootstrapper fsLiquibaseDatabaseBootstrapper = new FsLiquibaseDatabaseBootstrapper();
-    private final FileServiceClasspathFileResource fileServiceClasspathFileResource = new FileServiceClasspathFileResource();
+    private final LiquibaseDatabaseBootstrapper liquibaseDatabaseBootstrapper = new LiquibaseDatabaseBootstrapper();
+    private final ClasspathFileResource classpathFileResource = new ClasspathFileResource();
 
     private DataSource dataSource = new FileStoreTestDataSourceProvider().getDatasource();
 
@@ -66,7 +66,7 @@ public class FileServiceIT {
             FileStorer.class,
             FileReference.class,
 
-            FsInitialContextFactory.class,
+            InitialContextFactory.class,
 
             FileService.class,
 
@@ -76,14 +76,14 @@ public class FileServiceIT {
             MetadataJdbcRepository.class,
             FileStore.class,
             MetadataUpdater.class,
-            FsUtcClock.class,
+            UtcClock.class,
             LogFactory.class,
 
             MetadataUpdater.class,
             ContentTypeDetector.class,
-            FsLoggerProducer.class,
+            LoggerProducer.class,
             Logger.class,
-            FsUtcClock.class
+            UtcClock.class
     })
     public WebApp war() {
         return new WebApp()
@@ -93,7 +93,7 @@ public class FileServiceIT {
 
     @BeforeEach
     public void initDatabase() throws Exception {
-        fsLiquibaseDatabaseBootstrapper.bootstrap(
+        liquibaseDatabaseBootstrapper.bootstrap(
                 LIQUIBASE_FILE_STORE_DB_CHANGELOG_XML,
                 dataSource.getConnection());
     }
@@ -107,7 +107,7 @@ public class FileServiceIT {
                 .add("metadataField", "metadataValue")
                 .build();
 
-        final File inputFile = fileServiceClasspathFileResource.getFileFromClasspath("/for-testing-file-store.jpg");
+        final File inputFile = classpathFileResource.getFileFromClasspath("/for-testing-file-store.jpg");
         final FileInputStream inputStream = new FileInputStream(inputFile);
 
         final UUID fileId = fileService.store(metadata, inputStream);

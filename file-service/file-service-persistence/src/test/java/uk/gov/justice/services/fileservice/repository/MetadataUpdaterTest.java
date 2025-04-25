@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.StorageException;
 import uk.gov.justice.fileservice.common.file.ContentTypeDetector;
 
@@ -36,7 +36,7 @@ public class MetadataUpdaterTest {
     private ContentTypeDetector contentTypeDetector;
 
     @Mock
-    private FsUtcClock fsUtcClock;
+    private UtcClock fsUtcClock;
 
     @InjectMocks
     private MetadataUpdater metadataUpdater;

@@ -25,7 +25,7 @@ import liquibase.resource.ClassLoaderResourceAccessor;
  * You will need to ensure that your liquibase changelog file is on your classpath (usually by
  * adding the liquibase jars to maven)
  */
-public class FsLiquibaseDatabaseBootstrapper {
+public class LiquibaseDatabaseBootstrapper {
 
     private static final String NO_CONTEXT = "";
 

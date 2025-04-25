@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 @ApplicationScoped
 @Alternative
 @Priority(100)
-public class FsLoggerProducer {
+public class LoggerProducer {
 
     @Produces
     public Logger loggerProducer(final InjectionPoint injectionPoint) {

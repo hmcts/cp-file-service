@@ -8,7 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.domain.FileReference;
 import uk.gov.justice.services.fileservice.repository.FileStore;
 
@@ -37,7 +37,7 @@ public class FileServiceTest {
     private FileStore fileStore;
 
     @Mock
-    private FsUtcClock clock;
+    private UtcClock clock;
 
     @Mock
     private Logger logger;

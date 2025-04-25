@@ -4,7 +4,7 @@ import static java.lang.String.format;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 import static uk.gov.justice.services.file.alfresco.Headers.headersWithUserId;
 
-import uk.gov.justice.fileservice.common.configuration.FsGlobalValue;
+import uk.gov.justice.fileservice.common.configuration.GlobalValue;
 import uk.gov.justice.services.file.api.FileOperationException;
 import uk.gov.justice.services.file.api.remover.FileRemover;
 
@@ -17,11 +17,11 @@ import javax.ws.rs.core.Response;
 public class AlfrescoFileRemover implements FileRemover {
 
     @Inject
-    @FsGlobalValue(key = "alfrescoDeletePath", defaultValue = "/service/slingshot/doclib/action/file/node/workspace/SpacesStore/")
+    @GlobalValue(key = "alfrescoDeletePath", defaultValue = "/service/slingshot/doclib/action/file/node/workspace/SpacesStore/")
     String alfrescoDeletePath;
 
     @Inject
-    @FsGlobalValue(key = "alfrescoDeleteUser")
+    @GlobalValue(key = "alfrescoDeleteUser")
     String alfrescoDeleteUser;
 
     @Inject

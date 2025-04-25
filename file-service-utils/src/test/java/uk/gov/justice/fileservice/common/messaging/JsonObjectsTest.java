@@ -10,9 +10,9 @@ import javax.json.JsonObjectBuilder;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for the {@link FsJsonObjects} class.
+ * Unit tests for the {@link JsonObjects} class.
  */
-public class FsJsonObjectsTest {
+public class JsonObjectsTest {
 
     @Test
     public void shouldCreateBuilderFromJsonObject() {
@@ -20,7 +20,7 @@ public class FsJsonObjectsTest {
                 .add("name", "test")
                 .build();
 
-        JsonObjectBuilder builder = FsJsonObjects.createObjectBuilder(source);
+        JsonObjectBuilder builder = JsonObjects.createObjectBuilder(source);
 
         assertThat(builder.build(), equalTo(source));
     }
@@ -34,7 +34,7 @@ public class FsJsonObjectsTest {
                 .add("ignore2", "ignore this as well")
                 .build();
 
-        JsonObjectBuilder builder = FsJsonObjects.createObjectBuilderWithFilter(source, x -> !"ignore1".equals(x) && !"ignore2".equals(x));
+        JsonObjectBuilder builder = JsonObjects.createObjectBuilderWithFilter(source, x -> !"ignore1".equals(x) && !"ignore2".equals(x));
 
         JsonObject actual = builder.build();
         assertThat(actual.size(), equalTo(2));

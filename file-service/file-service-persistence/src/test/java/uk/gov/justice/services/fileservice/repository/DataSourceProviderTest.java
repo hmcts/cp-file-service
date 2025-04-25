@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import uk.gov.justice.fileservice.common.jdbc.persistence.FsInitialContextFactory;
+import uk.gov.justice.fileservice.common.jdbc.persistence.InitialContextFactory;
 import uk.gov.justice.services.fileservice.api.ConfigurationException;
 
 import javax.naming.InitialContext;
@@ -25,7 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class DataSourceProviderTest {
 
     @Mock
-    private FsInitialContextFactory fsInitialContextFactory;
+    private InitialContextFactory initialContextFactory;
 
     @InjectMocks
     private DataSourceProvider dataSourceProvider;
@@ -36,7 +36,7 @@ public class DataSourceProviderTest {
         final InitialContext initialContext = mock(InitialContext.class);
         final DataSource dataSource = mock(DataSource.class);
 
-        when(fsInitialContextFactory.create()).thenReturn(initialContext);
+        when(initialContextFactory.create()).thenReturn(initialContext);
         when(initialContext.lookup("java:/DS.fileservice")).thenReturn(dataSource);
 
         assertThat(dataSourceProvider.getDatasource(), is(dataSource));
@@ -49,7 +49,7 @@ public class DataSourceProviderTest {
 
         final InitialContext initialContext = mock(InitialContext.class);
 
-        when(fsInitialContextFactory.create()).thenReturn(initialContext);
+        when(initialContextFactory.create()).thenReturn(initialContext);
         when(initialContext.lookup("java:/DS.fileservice")).thenThrow(namingException);
 
         final ConfigurationException expected = assertThrows(

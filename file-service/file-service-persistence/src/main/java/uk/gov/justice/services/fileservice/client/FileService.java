@@ -1,7 +1,7 @@
 package uk.gov.justice.services.fileservice.client;
 
 
-import uk.gov.justice.fileservice.common.util.FsUtcClock;
+import uk.gov.justice.fileservice.common.util.UtcClock;
 import uk.gov.justice.services.fileservice.api.FileRetriever;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.FileStorer;
@@ -31,7 +31,7 @@ public class FileService implements FileStorer, FileRetriever {
     private FileStore fileStore;
 
     @Inject
-    private FsUtcClock clock;
+    private UtcClock clock;
 
     @Inject
     private Logger logger;

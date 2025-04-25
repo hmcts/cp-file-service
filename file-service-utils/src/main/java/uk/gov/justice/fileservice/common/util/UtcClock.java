@@ -11,7 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
  * Implementation of a clock that always generates a {@link ZonedDateTime} in UTC.
  */
 @ApplicationScoped
-public class FsUtcClock implements FsClock {
+public class UtcClock implements Clock {
 
     /**
      * @return The current UTC time truncated to milliseconds

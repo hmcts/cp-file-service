@@ -12,9 +12,9 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
 
-public final class FsReflectionUtil {
+public final class ReflectionUtil {
 
-    private FsReflectionUtil() {
+    private ReflectionUtil() {
     }
 
     /**
@@ -80,7 +80,7 @@ public final class FsReflectionUtil {
             field.setAccessible(true);
             field.set(object, fieldValue);
         } catch (final IllegalAccessException e) {
-            throw new FsReflectionException(format("Unable to access field '%s' on class %s", fieldName, object.getClass().getName()), e);
+            throw new ReflectionException(format("Unable to access field '%s' on class %s", fieldName, object.getClass().getName()), e);
         }
     }
 
@@ -103,7 +103,7 @@ public final class FsReflectionUtil {
             }
         }
 
-        throw new FsReflectionException(format("No field named '%s' found on class %s", fieldName, aClass.getName()));
+        throw new ReflectionException(format("No field named '%s' found on class %s", fieldName, aClass.getName()));
     }
 
     /**
@@ -125,7 +125,7 @@ public final class FsReflectionUtil {
             field.setAccessible(true);
             return fieldClassType.cast(field.get(object));
         } catch (final IllegalAccessException e) {
-            throw new FsReflectionException(format("Unable to access field '%s' on class %s", fieldName, object.getClass().getName()), e);
+            throw new ReflectionException(format("Unable to access field '%s' on class %s", fieldName, object.getClass().getName()), e);
         }
     }
 

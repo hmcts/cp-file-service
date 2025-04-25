@@ -1,6 +1,6 @@
 package uk.gov.justice.fileservice.common.host;
 
-public class FsTestHostProvider {
+public class TestHostProvider {
 
     public static final String INTEGRATION_HOST_KEY = "INTEGRATION_HOST_KEY";
     public static final String ARTEMIS_HOST_KEY = "ARTEMIS_HOST_KEY";

@@ -6,7 +6,7 @@ import static java.util.Optional.ofNullable;
 import static javax.ws.rs.core.MediaType.valueOf;
 import static uk.gov.justice.services.file.alfresco.Headers.headersWithUserId;
 
-import uk.gov.justice.fileservice.common.configuration.FsGlobalValue;
+import uk.gov.justice.fileservice.common.configuration.GlobalValue;
 import uk.gov.justice.services.file.api.FileOperationException;
 import uk.gov.justice.services.file.api.requester.FileRequester;
 
@@ -24,15 +24,15 @@ public class AlfrescoFileRequester implements FileRequester {
 
 
     @Inject
-    @FsGlobalValue(key = "alfrescoWorkspacePath", defaultValue = "/service/api/node/content/workspace/SpacesStore/")
+    @GlobalValue(key = "alfrescoWorkspacePath", defaultValue = "/service/api/node/content/workspace/SpacesStore/")
     String alfrescoWorkspacePath;
 
     @Inject
-    @FsGlobalValue(key = "alfrescoPdfContentWorkspacePath", defaultValue = "/service/api/requestpdf/workspace/SpacesStore/")
+    @GlobalValue(key = "alfrescoPdfContentWorkspacePath", defaultValue = "/service/api/requestpdf/workspace/SpacesStore/")
     String alfrescoPdfContentWorkspacePath;
 
     @Inject
-    @FsGlobalValue(key = "alfrescoReadUser")
+    @GlobalValue(key = "alfrescoReadUser")
     String alfrescoReadUser;
 
     @Inject
