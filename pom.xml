@@ -12,7 +12,7 @@
 
     <groupId>uk.gov.justice.framework</groupId>
     <artifactId>cp-file-service</artifactId>
-    <version>17.103.2-SNAPSHOT</version>
+    <version>17.104.0-M1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Framework File service</name>
@@ -28,7 +28,7 @@
 
     <properties>
         <cpp.repo.name>cp-file-service</cpp.repo.name>
-        <maven-common-bom.version>17.103.1</maven-common-bom.version>
+        <maven-common-bom.version>17.104.0-M1</maven-common-bom.version>
 
         <!-- plugin related -->
         <plugins.maven.compiler.version>3.10.1</plugins.maven.compiler.version>
