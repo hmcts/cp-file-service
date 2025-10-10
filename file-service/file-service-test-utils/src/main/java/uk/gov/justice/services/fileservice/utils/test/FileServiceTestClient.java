@@ -3,7 +3,7 @@ package uk.gov.justice.services.fileservice.utils.test;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.UUID.randomUUID;
-import static javax.json.Json.createObjectBuilder;
+import static uk.gov.justice.fileservice.common.messaging.JsonObjects.jsonBuilderFactory;
 
 import uk.gov.justice.fileservice.common.converter.ZonedDateTimes;
 import uk.gov.justice.fileservice.common.util.UtcClock;
@@ -98,7 +98,7 @@ public class FileServiceTestClient {
             final InputStream contentStream,
             final Connection connection) throws FileServiceException {
 
-        final JsonObject metadata = createObjectBuilder()
+        final JsonObject metadata = jsonBuilderFactory.createObjectBuilder()
                 .add("fileName", fileName)
                 .add("mediaType", mediaType)
                 .add("createdAt", ZonedDateTimes.toString(fsUtcClock.now()))
