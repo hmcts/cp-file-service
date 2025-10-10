@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [17.104.0-M2] - 2025-10-10
+### Changed
+- Used JsonFactory instead of Json.create methods as per https://github.com/jakartaee/jsonp-api/issues/154
+
 ## [17.104.0-M1] - 2025-07-29
 ### Changed
 - Updated version to 17.104.x for the new framework E
