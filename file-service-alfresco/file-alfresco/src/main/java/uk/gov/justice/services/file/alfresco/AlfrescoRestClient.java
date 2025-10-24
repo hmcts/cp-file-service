@@ -3,9 +3,13 @@ package uk.gov.justice.services.file.alfresco;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
+import org.apache.commons.lang3.concurrent.AtomicSafeInitializer;
+import org.apache.commons.lang3.concurrent.LazyInitializer;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import uk.gov.justice.fileservice.common.configuration.GlobalValue;
 
 import java.io.InputStream;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -23,6 +27,8 @@ import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 public class AlfrescoRestClient {
 
     private static final String NO_PROXY = "none";
+    private static final Client CLIENT = ClientBuilder.newClient();
+    private static final AtomicReference<ResteasyClient> CLIENT_WITH_PROXY = new AtomicReference<>();
 
     @Inject
     @GlobalValue(key = "alfrescoBaseUri")
@@ -86,11 +92,15 @@ public class AlfrescoRestClient {
 
     private Client client() {
         if (NO_PROXY.equals(proxyType)) {
-            return ClientBuilder.newClient();
+            return CLIENT;
         } else {
-            return new ResteasyClientBuilderImpl()
-                    .defaultProxy(proxyHostname, parseInt(proxyPort), proxyType)
-                    .build();
+            return CLIENT_WITH_PROXY.updateAndGet(client -> {
+                if (client == null) {
+                    return new ResteasyClientBuilderImpl()
+                            .defaultProxy(proxyHostname, parseInt(proxyPort), proxyType)
+                            .build();
+                } else return client;
+            });
         }
     }
 

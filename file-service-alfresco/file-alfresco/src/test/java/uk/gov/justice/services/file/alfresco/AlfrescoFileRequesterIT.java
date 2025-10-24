@@ -32,7 +32,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-@WireMockTest(httpPort = 23265)
+@WireMockTest(httpPort = 23266)
 public class AlfrescoFileRequesterIT {
 
     private static final String BASE_PATH = "http://localhost:%d/alfresco";
@@ -42,7 +42,7 @@ public class AlfrescoFileRequesterIT {
     private static final String ALFRESCO_WORKSPACE_PDF_TRANSFORMATION_PATH = "/service/api/requestpdf/workspace/SpacesStore/";
 
 
-    private static int PORT = 23265;
+    private static int PORT = 23266;
 
     private static AlfrescoFileRequester fileRequester;
 
