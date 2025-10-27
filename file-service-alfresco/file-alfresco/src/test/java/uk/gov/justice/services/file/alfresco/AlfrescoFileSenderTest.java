@@ -55,6 +55,7 @@ public class AlfrescoFileSenderTest {
 
         //then
         verify(restClient).post(eq(UPLOAD_PATH), eq(MULTIPART_FORM_DATA_TYPE), eq(headersWithUserId(USER_ID)), any());
+        verify(response).close();
     }
 
     private String alfrescoResponseOf(final String fileId, final String fileMimeType) {

@@ -90,7 +90,7 @@ public class AlfrescoRestClient {
                 .headers(headers);
     }
 
-    private Client client() {
+    Client client() {
         if (NO_PROXY.equals(proxyType)) {
             return CLIENT;
         } else {
