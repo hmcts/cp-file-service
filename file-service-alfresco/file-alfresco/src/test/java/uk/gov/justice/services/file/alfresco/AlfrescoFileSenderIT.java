@@ -24,10 +24,10 @@ import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-@WireMockTest(httpPort = 23265)
+@WireMockTest(httpPort = 23267)
 public class AlfrescoFileSenderIT {
 
-    private static final int PORT = 23265;
+    private static final int PORT = 23267;
     private static final String USER_ID = "user1234";
     private static final String WEB_CONTEXT = "/alfresco";
     private static final String UPLOAD_PATH = "/service/case/upload";
