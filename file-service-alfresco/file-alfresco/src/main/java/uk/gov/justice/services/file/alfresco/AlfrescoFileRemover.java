@@ -11,6 +11,7 @@ import uk.gov.justice.services.file.api.remover.FileRemover;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ProcessingException;
+import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
 
 @ApplicationScoped
@@ -30,10 +31,12 @@ public class AlfrescoFileRemover implements FileRemover {
     @Override
     public void remove(final String fileId) {
         try {
-            final Response response = restClient
-                    .delete(format("%s%s", alfrescoDeletePath, fileId), APPLICATION_JSON_TYPE, headersWithUserId(alfrescoDeleteUser));
-            if (response.getStatusInfo().getFamily().compareTo(Response.Status.Family.SUCCESSFUL) != 0) {
-                throw new FileOperationException(format("Error while deleting the document. Code:%d, Reason:%s", response.getStatus(), response.getStatusInfo().getReasonPhrase()));
+            final String uri = format("%s%s", alfrescoDeletePath, fileId);
+            final MultivaluedHashMap<String, Object> headers = headersWithUserId(alfrescoDeleteUser);
+            try (Response response = restClient.delete(uri, APPLICATION_JSON_TYPE, headers)) {
+                if (response.getStatusInfo().getFamily().compareTo(Response.Status.Family.SUCCESSFUL) != 0) {
+                    throw new FileOperationException(format("Error while deleting the document. Code:%d, Reason:%s", response.getStatus(), response.getStatusInfo().getReasonPhrase()));
+                }
             }
         } catch (ProcessingException e) {
             throw new FileOperationException("Error deleting file from Alfresco", e);
