@@ -5,7 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [17.103.0] - 2025-07-11
+## [17.103.2-M1] - 2025-11-20
+- Correctly organise AlfrescoRestClient to utilise client lifecycle.
+- Used JsonFactory instead of Json.create methods
+
+## [17.103.1] - 2025-07-11
 ### Changed
 - Update maven-framework-parent-pom to 17.103.0
 - Update maven-common-bom to 17.103.1
