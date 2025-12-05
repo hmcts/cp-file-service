@@ -20,6 +20,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
 
 import com.jayway.jsonpath.JsonPath;
@@ -45,15 +46,17 @@ public class AlfrescoFileSender implements FileSender {
     public FileData send(final String fileName, final InputStream content) {
         try {
 
-            final Response response = restClient
-                    .post(alfrescoUploadPath, MULTIPART_FORM_DATA_TYPE, headersWithUserId(alfrescoUploadUser), requestEntityOf(fileName, content));
-            final String responseEntity = response.readEntity(String.class);
+            final Entity<MultipartFormDataOutput> entity = requestEntityOf(fileName, content);
+            final MultivaluedHashMap<String, Object> headers = headersWithUserId(alfrescoUploadUser);
+            try (Response response = restClient.post(alfrescoUploadPath, MULTIPART_FORM_DATA_TYPE, headers, entity)) {
+                final String responseEntity = response.readEntity(String.class);
 
-            if (response.getStatusInfo() != OK || isEmpty(responseEntity)) {
-                //Alfresco is *very* accepting - failed exceptions represent service outages/problems only.
-                throw new FileOperationException(format("Error while uploading document. Code:%d, Reason:%s", response.getStatus(), response.getStatusInfo().getReasonPhrase()));
+                if (response.getStatusInfo() != OK || isEmpty(responseEntity)) {
+                    //Alfresco is *very* accepting - failed exceptions represent service outages/problems only.
+                    throw new FileOperationException(format("Error while uploading document. Code:%d, Reason:%s", response.getStatus(), response.getStatusInfo().getReasonPhrase()));
+                }
+                return fileDataFrom(responseEntity);
             }
-            return fileDataFrom(responseEntity);
         } catch (ProcessingException e) {
             throw new FileOperationException("Error uploading resource into Alfresco", e);
         }
