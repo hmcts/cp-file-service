@@ -1,13 +1,11 @@
 package uk.gov.justice.services.fileservice.repository;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
-import static javax.json.Json.createReader;
-
 import uk.gov.justice.services.fileservice.api.DataIntegrityException;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 import uk.gov.justice.services.fileservice.api.StorageException;
 
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,8 +14,9 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static uk.gov.justice.fileservice.common.messaging.JsonObjects.jsonReaderFactory;
 
 /**
  * Class for handling inserts/updates/selects on the 'metadata' database table. This class is not
@@ -99,7 +98,7 @@ public class MetadataJdbcRepository {
 
 
     private JsonObject toJsonObject(final String json) {
-        try (final JsonReader reader = createReader(new StringReader(json));) {
+        try (final JsonReader reader = jsonReaderFactory.createReader(new StringReader(json));) {
             return reader.readObject();
         }
     }
