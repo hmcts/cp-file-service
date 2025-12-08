@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [17.103.2-M1] - 2025-11-20
+## [17.103.2] - 2025-12-08
 - Correctly organise AlfrescoRestClient to utilise client lifecycle.
 - Used JsonFactory instead of Json.create methods
 
