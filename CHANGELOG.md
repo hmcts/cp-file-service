@@ -5,16 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [17.104.0-M3] - 2025-10-27
+# [17.104.0] - 2025-12-16
 ### Changed
-- Correctly organise AlfrescoRestClient to utilise client lifecycle. 
-
-## [17.104.0-M2] - 2025-10-10
-### Changed
+- Correctly organise AlfrescoRestClient to utilise client lifecycle.
 - Used JsonFactory instead of Json.create methods as per https://github.com/jakartaee/jsonp-api/issues/154
-
-## [17.104.0-M1] - 2025-07-29
-### Changed
 - Updated version to 17.104.x for the new framework E
 ### Security
 - Updated to latest common-bom for latest third party security fixes:
