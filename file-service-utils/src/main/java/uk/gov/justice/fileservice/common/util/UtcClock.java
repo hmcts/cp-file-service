@@ -5,7 +5,7 @@ import static java.time.temporal.ChronoUnit.MILLIS;
 
 import java.time.ZonedDateTime;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * Implementation of a clock that always generates a {@link ZonedDateTime} in UTC.

@@ -6,8 +6,8 @@ import uk.gov.justice.fileservice.common.jdbc.persistence.InitialContextFactory;
 import uk.gov.justice.services.fileservice.api.ConfigurationException;
 import uk.gov.justice.services.fileservice.api.FileServiceException;
 
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Inject;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
