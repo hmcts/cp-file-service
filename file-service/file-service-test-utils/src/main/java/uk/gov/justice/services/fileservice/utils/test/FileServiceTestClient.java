@@ -18,7 +18,7 @@ import java.sql.Connection;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.json.JsonObject;
+import jakarta.json.JsonObject;
 
 /**
  * Test client for testing input/output to the File Service

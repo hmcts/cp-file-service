@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * Class for handling inserts/updates/selects on the 'content' database table. This class is not
