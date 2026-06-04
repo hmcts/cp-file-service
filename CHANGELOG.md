@@ -5,10 +5,30 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-# [17.104.0] - 2025-12-16
+## [21.0.0-M1] - 2026-06-02
 ### Changed
-- Correctly organise AlfrescoRestClient to utilise client lifecycle.
+- Upgraded to Java 21 and Jakarta EE 10 (17.104.x release line)
+- Updated `maven-framework-parent-pom` to `21.0.0-M2` and `maven-common-bom` to `21.0.0-M1`
+- Migrated all `javax.*` imports to `jakarta.*` across all modules
+- Updated CDI `beans.xml` descriptors from version `1.1` to `4.0` (`beans_4_0.xsd`) in all modules
+- Removed `org.glassfish:javax.json` dependency; replaced with `org.glassfish:jakarta.json` where needed
+
+### Fixed
+- `MetadataJdbcRepository`: replaced stale `javax.json` static imports; uses `JsonObjects.jsonReaderFactory` (shared factory instance — `Json.createReaderFactory` is expensive and must not be called per-invocation)
+- `FileServiceTestClient`: replaced `jsonBuilderFactory.createObjectBuilder()` with the shared factory from `JsonObjects` for the same reason
+- `AlfrescoRestClientTest`: migrated all `javax.ws.rs.*` imports (including static import) to `jakarta.ws.rs.*`
+- Removed redundant explicit `jakarta.enterprise:jakarta.cdi-api` dependency from `file-alfresco` — already provided transitively by `jakarta.jakartaee-api`
+
+## [17.104.0-M3] - 2025-10-27
+### Changed
+- Correctly organise AlfrescoRestClient to utilise client lifecycle. 
+
+## [17.104.0-M2] - 2025-10-10
+### Changed
 - Used JsonFactory instead of Json.create methods as per https://github.com/jakartaee/jsonp-api/issues/154
+
+## [17.104.0-M1] - 2025-07-29
+### Changed
 - Updated version to 17.104.x for the new framework E
 ### Security
 - Updated to latest common-bom for latest third party security fixes:

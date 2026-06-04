@@ -3,7 +3,7 @@ package uk.gov.justice.services.fileservice.it;
 import static java.io.File.createTempFile;
 import static java.nio.file.Files.copy;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-import static javax.json.Json.createObjectBuilder;
+import static jakarta.json.Json.createObjectBuilder;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,8 +31,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
-import javax.inject.Inject;
-import javax.json.JsonObject;
+import jakarta.inject.Inject;
+import jakarta.json.JsonObject;
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.LogFactory;

@@ -2,11 +2,11 @@ package uk.gov.justice.fileservice.common.messaging;
 
 import java.util.function.Function;
 
-import javax.json.Json;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonReaderFactory;
+import jakarta.json.Json;
+import jakarta.json.JsonBuilderFactory;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
+import jakarta.json.JsonReaderFactory;
 
 /**
  * Collection of static utility methods for getting deep values from a {@link JsonObject}.
