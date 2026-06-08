@@ -5,10 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [21.0.0-M1] - 2026-06-02
+## [25.104.0-M3] - 2026-06-08
 ### Changed
-- Upgraded to Java 21 and Jakarta EE 10 (17.104.x release line)
-- Updated `maven-framework-parent-pom` to `21.0.0-M2` and `maven-common-bom` to `21.0.0-M1`
+- Upgraded to Java 25 / WildFly 40 (25.104.x release line)
+- Updated `maven-framework-parent-pom` to `25.104.0-M3` and `maven-common-bom` to `25.104.0-M3`
 - Migrated all `javax.*` imports to `jakarta.*` across all modules
 - Updated CDI `beans.xml` descriptors from version `1.1` to `4.0` (`beans_4_0.xsd`) in all modules
 - Removed `org.glassfish:javax.json` dependency; replaced with `org.glassfish:jakarta.json` where needed
