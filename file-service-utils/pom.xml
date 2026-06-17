@@ -6,12 +6,12 @@
     <parent>
         <groupId>uk.gov.justice.framework</groupId>
         <artifactId>cp-file-service</artifactId>
-        <version>25.104.0-M4-SNAPSHOT</version>
+        <version>25.104.0-M4</version>
     </parent>
 
     <groupId>uk.gov.justice.file.service</groupId>
     <artifactId>file-service-utils</artifactId>
-    <version>25.104.0-M4-SNAPSHOT</version>
+    <version>25.104.0-M4</version>
 
     <dependencies>
         <dependency>
