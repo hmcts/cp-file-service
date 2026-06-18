@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [25.104.0-M6] - 2026-06-18
+### Changed
+- Bumped parent `maven-framework-parent-pom` to `25.104.0-M7` — picks up `liquibase.version=5.0.3`
+
 ## [25.104.0-M3] - 2026-06-08
 ### Changed
 - Upgraded to Java 25 / WildFly 40 (25.104.x release line)
