@@ -6,7 +6,7 @@
     <parent>
         <groupId>uk.gov.justice</groupId>
         <artifactId>maven-framework-parent-pom</artifactId>
-        <version>25.104.0-M7</version>
+        <version>25.104.0-M8</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,7 +28,7 @@
 
     <properties>
         <cpp.repo.name>cp-file-service</cpp.repo.name>
-        <maven-common-bom.version>25.104.0-M5</maven-common-bom.version>
+        <maven-common-bom.version>25.104.0-M6</maven-common-bom.version>
 
         <!-- plugin related -->
         <plugins.maven.failsafe.version>3.1.2</plugins.maven.failsafe.version>
