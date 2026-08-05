@@ -12,7 +12,7 @@
 
     <groupId>uk.gov.justice.framework</groupId>
     <artifactId>cp-file-service</artifactId>
-    <version>25.104.0-M8</version>
+    <version>25.104.0-M9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Framework File service</name>
