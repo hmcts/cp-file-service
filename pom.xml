@@ -6,7 +6,7 @@
     <parent>
         <groupId>uk.gov.justice</groupId>
         <artifactId>maven-framework-parent-pom</artifactId>
-        <version>25.104.0-M9</version>
+        <version>25.104.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,16 +28,14 @@
 
     <properties>
         <cpp.repo.name>cp-file-service</cpp.repo.name>
-        <maven-common-bom.version>25.104.0-M7</maven-common-bom.version>
+        <maven-common-bom.version>25.104.0</maven-common-bom.version>
 
-        <!-- plugin related -->
-        <plugins.maven.failsafe.version>3.1.2</plugins.maven.failsafe.version>
         <!--
-            coveralls-maven-plugin:4.3.0 ships with jakarta.xml.bind-api:2.3.1 which is
-            unavailable in the CI repo. Pin to 2.3.2 via plugin <dependencies> override.
-            Same version used by the RAML parser — see cp-framework-libraries root pom.
+            plugins.maven.failsafe.version comes from maven-parent-pom, and
+            jakarta.xml.bind-api.raml.version from maven-framework-parent-pom. Both are used
+            below and must not be re-pinned here — a local copy silently overrides the
+            centralised value.
         -->
-        <jakarta.xml.bind-api.raml.version>2.3.2</jakarta.xml.bind-api.raml.version>
     </properties>
 
     <scm>
